@@ -1,48 +1,22 @@
-/**
- * My To Do List App
- *
- * @format
- */
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import AboutScreen from './src/screens/AboutScreen';
 
-'use client'
-import React, {useState} from 'react';
-import {
-  Alert,
-  SafeAreaView,
-} from 'react-native';
-import ToDoList from './src/component/ToDoList';
-import ToDoForm from './src/component/ToDoForm';
+const Stack = createNativeStackNavigator();
 
-
-function App() {
-
-  const[tasks,setTasks] = useState (
-    ['Do laundry',
-  'Go to gym',
-  'Walk dog']
-);
-
-  const addTask = (taskText: string) => {
-    //check taskText is empty string or duplicate text
-    if (taskText === '') {
-      Alert.alert('Empty Task', 'Please add detail in your task!');
-      return;
-    }
-    if (tasks.includes(taskText)) {
-      Alert.alert('Duplicate Task', 'This task already exists!');
-      return;
-    }
-    setTasks([...tasks, taskText]);
-  };
-
+function App():React.JSX.Element {
   return (
-    <SafeAreaView>
-      <ToDoList tasks={tasks}/>
-      <ToDoForm addTask = {addTask}/>
-    </SafeAreaView>
+    <NavigationContainer>
+
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+
+    </NavigationContainer>
   );
 }
-
-
 
 export default App;
